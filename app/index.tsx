@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import {
+  View,
+  Text,
   Image,
   ScrollView,
-  StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
+  StyleSheet,
 } from "react-native";
 
-// Ukuran & margin gambar
-const imageSize = 100;
-const imageMargin = 5;
+// Ukuran dan margin untuk setiap gambar
+const ukuranGambar = 100;
+const jarakGambar = 5;
 
-const mainImages = [
+// Daftar gambar utama dan alternatif
+const gambarUtama = [
   "https://i.pinimg.com/736x/a2/aa/08/a2aa08bfcc56b815a91d22d15a2088e6.jpg",
   "https://i.pinimg.com/736x/2c/ba/a3/2cbaa35c3010f921f621efdeb84d1c18.jpg",
   "https://i.pinimg.com/736x/44/00/26/44002616db854d84281c31c3b96143a0.jpg",
@@ -24,7 +25,7 @@ const mainImages = [
   "https://i.pinimg.com/736x/d4/15/45/d41545148c1d986d5ccf14cafd7c5b18.jpg",
 ];
 
-const altImages = [
+const gambarAlternatif = [
   "https://i.pinimg.com/1200x/07/ff/36/07ff36406497395f1b33f87ba79c2cd2.jpg",
   "https://i.pinimg.com/736x/be/48/b9/be48b9c22c38f2c5a8cd01752f83c8b7.jpg",
   "https://i.pinimg.com/1200x/12/7d/5d/127d5d8022f02b47e5bd891f8a42b2e5.jpg",
@@ -36,44 +37,43 @@ const altImages = [
   "https://i.pinimg.com/736x/f5/6c/f2/f56cf2d8074dad2bfc96103bf48789a5.jpg",
 ];
 
-export default function Index() {
-  const [imageStates, setImageStates] = useState(
-    Array.from({ length: 9 }, () => ({ isAlt: false, scale: 1, clickCount: 0 }))
+export default function Beranda() {
+  const [statusGambar, setStatusGambar] = useState(
+    Array.from({ length: 9 }, () => ({
+      pakaiAlternatif: false,
+      skala: 1,
+      jumlahKlik: 0,
+    }))
   );
 
-  const handlePress = (index: number) => {
-    setImageStates((prev) =>
-      prev.map((img, i) => {
+  const saatGambarDitekan = (index: number) => {
+    setStatusGambar((sebelumnya) =>
+      sebelumnya.map((item, i) => {
         if (i === index) {
-          const newClickCount = (img.clickCount + 1) % 3;
-          let newScale = 1;
-
-          if (newClickCount === 1) newScale = 1.2;
-          else if (newClickCount === 2) newScale = 1.4;
-          else newScale = 1;
-
+          const totalKlik = (item.jumlahKlik + 1) % 3;
+          const skalaBaru = totalKlik === 1 ? 1.2 : totalKlik === 2 ? 1.4 : 1;
           return {
-            isAlt: !img.isAlt,
-            scale: newScale,
-            clickCount: newClickCount,
+            pakaiAlternatif: !item.pakaiAlternatif,
+            skala: skalaBaru,
+            jumlahKlik: totalKlik,
           };
         }
-        return img;
+        return item;
       })
     );
   };
 
-  const styles = StyleSheet.create({
-    grid: {
+  const gaya = StyleSheet.create({
+    kontainerGrid: {
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "center",
-      maxWidth: imageSize * 3 + imageMargin * 6,
+      maxWidth: ukuranGambar * 3 + jarakGambar * 6,
     },
-    image: {
-      width: imageSize,
-      height: imageSize,
-      margin: imageMargin,
+    gayaGambar: {
+      width: ukuranGambar,
+      height: ukuranGambar,
+      margin: jarakGambar,
       borderRadius: 8,
       backgroundColor: "#ccc",
     },
@@ -115,7 +115,7 @@ export default function Index() {
           marginBottom: 20,
         }}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>
+        <Text style={{ color: "#fff", fontWeight: "bold" }}>
           105841106122
         </Text>
       </View>
@@ -132,12 +132,12 @@ export default function Index() {
           marginBottom: 20,
         }}
       >
-        <Text style={{ fontSize: 18, color: "black", fontWeight: "bold" }}>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
           ARSIFAH AINUN AULIA
         </Text>
       </View>
 
-      {/* Gambar Profil */}
+      {/* Foto Profil */}
       <View
         style={{
           flexDirection: "row",
@@ -156,7 +156,6 @@ export default function Index() {
             marginRight: 10,
           }}
         />
-
         <Image
           source={{
             uri: "https://ngdblog.africa/wp-content/uploads/2023/01/Wow-gif.gif",
@@ -167,21 +166,23 @@ export default function Index() {
 
       {/* Judul Grid */}
       <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
-        Grid Gambar Interaktif (3x3)
+        GAMBAR TUGAS 2
       </Text>
 
       {/* Grid Gambar */}
-      <View style={styles.grid}>
-        {mainImages.map((mainImg, index) => (
-          <TouchableOpacity key={index} onPress={() => handlePress(index)}>
+      <View style={gaya.kontainerGrid}>
+        {gambarUtama.map((linkGambar, idx) => (
+          <TouchableOpacity key={idx} onPress={() => saatGambarDitekan(idx)}>
             <Image
               source={{
-                uri: imageStates[index].isAlt ? altImages[index] : mainImg,
+                uri: statusGambar[idx].pakaiAlternatif
+                  ? gambarAlternatif[idx]
+                  : linkGambar,
               }}
               style={[
-                styles.image,
+                gaya.gayaGambar,
                 {
-                  transform: [{ scale: imageStates[index].scale }],
+                  transform: [{ scale: statusGambar[idx].skala }],
                 },
               ]}
             />
