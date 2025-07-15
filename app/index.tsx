@@ -9,10 +9,10 @@ import {
   View,
 } from 'react-native';
 
-// ==============================
-// DATA: Koleksi Gambar Utama & Alternatif (menggunakan URL lengkap agar gambar muncul)
-// ==============================
-const koleksiGambar = [
+// ===================
+// DATA: Galeri Gambar
+// =====================
+const gambarUnik = [
   {
     utama: "https://i.pinimg.com/736x/a2/aa/08/a2aa08bfcc56b815a91d22d15a2088e6.jpg",
     alternatif: "https://i.pinimg.com/1200x/07/ff/36/07ff36406497395f1b33f87ba79c2cd2.jpg",
@@ -50,51 +50,8 @@ const koleksiGambar = [
     alternatif: "https://i.pinimg.com/736x/f5/6c/f2/f56cf2d8074dad2bfc96103bf48789a5.jpg",
   },
 ];
-
 // ==============================
-// KOMPONEN GRID INTERAKTIF
-// ==============================
-export default function GaleriInteraktif() {
-  const [status, setStatus] = useState(
-    koleksiGambar.map(() => ({ skala: 1, ganti: false }))
-  );
-
-  // Ketika gambar ditekan: ubah gambar dan perbesar bertahap
-  const ketikaDitekan = (index : number) => {
-    setStatus((prev) =>
-      prev.map((item, i) => {
-        if (i !== index) return item;
-        const tingkatSkala = item.skala === 1 ? 1.2 : item.skala === 1.2 ? 2 : 1;
-        return {
-          skala: tingkatSkala,
-          ganti: !item.ganti,
-        };
-      })
-    );
-  };
-
-  return (
-    <ScrollView contentContainerStyle={gaya.kontainer}>
-      <Text style={gaya.judul}>Galeri Gambar Dinamis</Text>
-      <View style={gaya.grid}>
-        {koleksiGambar.map((gambar, i) => (
-          <Pressable key={i} onPress={() => ketikaDitekan(i)}>
-            <Image
-              source={{ uri: status[i].ganti ? gambar.alternatif : gambar.utama }}
-              style={[
-                gaya.gambar,
-                { transform: [{ scale: status[i].skala }] },
-              ]}
-            />
-          </Pressable>
-        ))}
-      </View>
-    </ScrollView>
-  );
-}
-
-// ==============================
-// GAYA / STYLE
+// STYLE
 // ==============================
 const ukuran = Dimensions.get('window').width / 3 - 20;
 
@@ -102,13 +59,13 @@ const gaya = StyleSheet.create({
   kontainer: {
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f5f9ff',
+    backgroundColor: '#eef6f9',
   },
   judul: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: '#333',
+    fontSize: 24,
+    fontWeight: '600',
+    marginBottom: 20,
+    color: '#2a3d45',
   },
   grid: {
     flexDirection: 'row',
@@ -120,9 +77,52 @@ const gaya = StyleSheet.create({
     height: ukuran,
     margin: 5,
     borderRadius: 12,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#dbe8ec',
     resizeMode: 'cover',
-    borderWidth: 2,
-    borderColor: '#b0bec5',
+    borderWidth: 1,
+    borderColor: '#90a4ae',
   },
 });
+
+
+// ==============================
+// KOMPONEN UTAMA: Galeri Interaktif
+// ==============================
+export default function GaleriInteraktif() {
+  const [status, setStatus] = useState(
+    gambarUnik.map(() => ({ skala: 1, ganti: false }))
+  );
+
+  const ubahGambar = (index: number) => {
+    setStatus((lama) =>
+      lama.map((item, i) => {
+        if (i !== index) return item;
+        const nextScale = item.skala === 1 ? 1.2 : item.skala === 1.2 ? 2 : 1;
+        return {
+          skala: nextScale,
+          ganti: !item.ganti,
+        };
+      })
+    );
+  };
+
+  return (
+    <ScrollView contentContainerStyle={gaya.kontainer}>
+      <Text style={gaya.judul}>Galeri tugas 2</Text>
+      <View style={gaya.grid}>
+        {gambarUnik.map((gambar, index) => (
+          <Pressable key={index} onPress={() => ubahGambar(index)}>
+            <Image
+              source={{ uri: status[index].ganti ? gambar.alternatif : gambar.utama }}
+              style={[
+                gaya.gambar,
+                { transform: [{ scale: status[index].skala }] },
+              ]}
+            />
+          </Pressable>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
