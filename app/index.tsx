@@ -41,9 +41,8 @@ const desain = StyleSheet.create({
     color: '#234e52',
     marginBottom: 18,
   },
-  gridArea: {
+  baris: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'center',
   },
   selGambar: {
@@ -79,22 +78,33 @@ export default function GaleriDinamis() {
     );
   };
 
+  const kelompokBaris = [];
+  for (let i = 0; i < sumberGambar.length; i += 3) {
+    kelompokBaris.push(sumberGambar.slice(i, i + 3));
+  }
+
   return (
     <ScrollView contentContainerStyle={desain.kontainer}>
       <Text style={desain.judul}>Galeri React Native</Text>
-      <View style={desain.gridArea}>
-        {sumberGambar.map(([utama, alternatif], i) => (
-          <Pressable key={i} onPress={() => ketikaTekan(i)}>
-            <Image
-              source={{ uri: tampilan[i].alternatif ? alternatif : utama }}
-              style={[
-                desain.selGambar,
-                { transform: [{ scale: tampilan[i].ukuran }] },
-              ]}
-            />
-          </Pressable>
-        ))}
-      </View>
+      {kelompokBaris.map((baris, rowIndex) => (
+        <View style={desain.baris} key={rowIndex}>
+          {baris.map(([utama, alternatif], colIndex) => {
+            const index = rowIndex * 3 + colIndex;
+            return (
+              <Pressable key={index} onPress={() => ketikaTekan(index)}>
+                <Image
+                  source={{ uri: tampilan[index].alternatif ? alternatif : utama }}
+                  style={[
+                    desain.selGambar,
+                    { transform: [{ scale: tampilan[index].ukuran }] },
+                  ]}
+                />
+              </Pressable>
+            );
+          })}
+        </View>
+      ))}
     </ScrollView>
   );
 }
+
