@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
   ScrollView,
-  TouchableOpacity,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
-// Ukuran dan margin untuk setiap gambar
-const ukuranGambar = 100;
-const jarakGambar = 5;
+const UKURAN = 100;
+const JARAK = 5;
 
-// Daftar gambar utama dan alternatif
-const gambarUtama = [
+
+const daftarGambarUtama = [
   "https://i.pinimg.com/736x/a2/aa/08/a2aa08bfcc56b815a91d22d15a2088e6.jpg",
   "https://i.pinimg.com/736x/2c/ba/a3/2cbaa35c3010f921f621efdeb84d1c18.jpg",
   "https://i.pinimg.com/736x/44/00/26/44002616db854d84281c31c3b96143a0.jpg",
@@ -25,7 +24,7 @@ const gambarUtama = [
   "https://i.pinimg.com/736x/d4/15/45/d41545148c1d986d5ccf14cafd7c5b18.jpg",
 ];
 
-const gambarAlternatif = [
+const daftarGambarGanti = [
   "https://i.pinimg.com/1200x/07/ff/36/07ff36406497395f1b33f87ba79c2cd2.jpg",
   "https://i.pinimg.com/736x/be/48/b9/be48b9c22c38f2c5a8cd01752f83c8b7.jpg",
   "https://i.pinimg.com/1200x/12/7d/5d/127d5d8022f02b47e5bd891f8a42b2e5.jpg",
@@ -37,44 +36,47 @@ const gambarAlternatif = [
   "https://i.pinimg.com/736x/f5/6c/f2/f56cf2d8074dad2bfc96103bf48789a5.jpg",
 ];
 
-export default function Beranda() {
-  const [statusGambar, setStatusGambar] = useState(
-    Array.from({ length: 9 }, () => ({
-      pakaiAlternatif: false,
-      skala: 1,
+export default function HalamanBeranda() {
+  const [dataGambar, setDataGambar] = useState(
+    Array(9).fill(null).map(() => ({
       jumlahKlik: 0,
+      tampilAlternatif: false,
     }))
   );
 
-  const saatGambarDitekan = (index: number) => {
-    setStatusGambar((sebelumnya) =>
-      sebelumnya.map((item, i) => {
-        if (i === index) {
-          const totalKlik = (item.jumlahKlik + 1) % 3;
-          const skalaBaru = totalKlik === 1 ? 1.2 : totalKlik === 2 ? 1.4 : 1;
+  const saatGambarDiklik = (posisi: number) => {
+    setDataGambar((sebelumnya) =>
+      sebelumnya.map((gbr, i) => {
+        if (i === posisi) {
+          const klikBaru = (gbr.jumlahKlik + 1) % 3;
           return {
-            pakaiAlternatif: !item.pakaiAlternatif,
-            skala: skalaBaru,
-            jumlahKlik: totalKlik,
+            jumlahKlik: klikBaru,
+            tampilAlternatif: !gbr.tampilAlternatif,
           };
         }
-        return item;
+        return gbr;
       })
     );
   };
 
+  const skalaGambar = (jumlah: number) => {
+    if (jumlah === 1) return 1.2;
+    if (jumlah === 2) return 2.0;
+    return 1.0;
+  };
+
   const gaya = StyleSheet.create({
-    kontainerGrid: {
+    kotakGrid: {
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "center",
-      maxWidth: ukuranGambar * 3 + jarakGambar * 6,
+      maxWidth: UKURAN * 3 + JARAK * 6,
     },
-    gayaGambar: {
-      width: ukuranGambar,
-      height: ukuranGambar,
-      margin: jarakGambar,
-      borderRadius: 8,
+    gambar: {
+      width: UKURAN,
+      height: UKURAN,
+      margin: JARAK,
+      borderRadius: 10,
       backgroundColor: "#ccc",
     },
   });
@@ -82,13 +84,11 @@ export default function Beranda() {
   return (
     <ScrollView
       contentContainerStyle={{
-        flexGrow: 1,
         alignItems: "center",
-        backgroundColor: "#F5F5F5",
         padding: 20,
+        backgroundColor: "#f2f2f2",
       }}
     >
-      {/* Segitiga Merah */}
       <View
         style={{
           width: 0,
@@ -103,12 +103,11 @@ export default function Beranda() {
         }}
       />
 
-      {/* Tabung Biru */}
       <View
         style={{
-          width: 120,
-          height: 50,
           backgroundColor: "blue",
+          width: 130,
+          height: 50,
           borderRadius: 25,
           justifyContent: "center",
           alignItems: "center",
@@ -120,41 +119,25 @@ export default function Beranda() {
         </Text>
       </View>
 
-      {/* Nama Oranye */}
       <View
         style={{
-          width: 200,
-          height: 60,
           backgroundColor: "orange",
-          justifyContent: "center",
-          alignItems: "center",
+          padding: 12,
           borderRadius: 10,
           marginBottom: 20,
         }}
       >
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
           ARSIFAH AINUN AULIA
         </Text>
       </View>
 
-      {/* Foto Profil */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginBottom: 30,
-        }}
-      >
+      <View style={{ flexDirection: "row", marginBottom: 20 }}>
         <Image
           source={{
             uri: "https://simak.unismuh.ac.id/upload/mahasiswa/105841106122_.jpg?1751871436",
           }}
-          style={{
-            width: 120,
-            height: 160,
-            borderRadius: 10,
-            marginRight: 10,
-          }}
+          style={{ width: 120, height: 160, borderRadius: 10, marginRight: 10 }}
         />
         <Image
           source={{
@@ -164,26 +147,25 @@ export default function Beranda() {
         />
       </View>
 
-      {/* Judul Grid */}
       <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
         GAMBAR TUGAS 2
       </Text>
 
-      {/* Grid Gambar */}
-      <View style={gaya.kontainerGrid}>
-        {gambarUtama.map((linkGambar, idx) => (
-          <TouchableOpacity key={idx} onPress={() => saatGambarDitekan(idx)}>
+      <View style={gaya.kotakGrid}>
+        {daftarGambarUtama.map((urlGambar, urutan) => (
+          <TouchableOpacity
+            key={urutan}
+            onPress={() => saatGambarDiklik(urutan)}
+          >
             <Image
               source={{
-                uri: statusGambar[idx].pakaiAlternatif
-                  ? gambarAlternatif[idx]
-                  : linkGambar,
+                uri: dataGambar[urutan].tampilAlternatif
+                  ? daftarGambarGanti[urutan]
+                  : urlGambar,
               }}
               style={[
-                gaya.gayaGambar,
-                {
-                  transform: [{ scale: statusGambar[idx].skala }],
-                },
+                gaya.gambar,
+                { transform: [{ scale: skalaGambar(dataGambar[urutan].jumlahKlik) }] },
               ]}
             />
           </TouchableOpacity>
