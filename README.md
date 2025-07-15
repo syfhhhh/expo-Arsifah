@@ -1,50 +1,91 @@
-# Welcome to your Expo app 👋
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView } from 'react-native';
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+export default function App() {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* Segitiga Merah */}
+      <View style={styles.segitiga} />
 
-## Get started
+      {/* Persegi Panjang dengan Nama */}
+      <View style={styles.persegi}>
+        <Text style={styles.teks}>ARSIFAH AINUN AULIA</Text>
+      </View>
 
-1. Install dependencies
+      {/* Bentuk Kapsul dengan NIM */}
+      <View style={styles.kapsul}>
+        <Text style={styles.teks}>105841106122</Text>
+      </View>
 
-   ```bash
-   npm install
-   ```
+      {/* Foto Profil dan GIF */}
+      <View style={styles.fotoRow}>
+        <Image
+          source={{
+            uri: "https://simak.unismuh.ac.id/upload/mahasiswa/105841106122_.jpg?1751871436",
+          }}
+          style={styles.gambar}
+        />
+        <Image
+          source={{
+            uri: "https://ngdblog.africa/wp-content/uploads/2023/01/Wow-gif.gif",
+          }}
+          style={styles.gambar}
+        />
+      </View>
+    </ScrollView>
+  );
+}
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+  },
+  segitiga: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 50,
+    borderRightWidth: 50,
+    borderBottomWidth: 100,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: 'red',
+    marginBottom: 30,
+  },
+  persegi: {
+    width: 250,
+    height: 60,
+    backgroundColor: 'orange',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+    borderRadius: 10,
+  },
+  kapsul: {
+    backgroundColor: 'blue',
+    paddingHorizontal: 40,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  teks: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  fotoRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 30,
+  },
+  gambar: {
+    width: 120,
+    height: 160,
+    borderRadius: 10,
+    marginHorizontal: 5,
+  },
+});

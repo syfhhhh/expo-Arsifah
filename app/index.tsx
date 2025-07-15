@@ -89,63 +89,6 @@ export default function HalamanBeranda() {
         backgroundColor: "#f2f2f2",
       }}
     >
-      <View
-        style={{
-          width: 0,
-          height: 0,
-          borderLeftWidth: 50,
-          borderRightWidth: 50,
-          borderBottomWidth: 100,
-          borderLeftColor: "transparent",
-          borderRightColor: "transparent",
-          borderBottomColor: "red",
-          marginBottom: 20,
-        }}
-      />
-
-      <View
-        style={{
-          backgroundColor: "blue",
-          width: 130,
-          height: 50,
-          borderRadius: 25,
-          justifyContent: "center",
-          alignItems: "center",
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ color: "#fff", fontWeight: "bold" }}>
-          105841106122
-        </Text>
-      </View>
-
-      <View
-        style={{
-          backgroundColor: "orange",
-          padding: 12,
-          borderRadius: 10,
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-          ARSIFAH AINUN AULIA
-        </Text>
-      </View>
-
-      <View style={{ flexDirection: "row", marginBottom: 20 }}>
-        <Image
-          source={{
-            uri: "https://simak.unismuh.ac.id/upload/mahasiswa/105841106122_.jpg?1751871436",
-          }}
-          style={{ width: 120, height: 160, borderRadius: 10, marginRight: 10 }}
-        />
-        <Image
-          source={{
-            uri: "https://ngdblog.africa/wp-content/uploads/2023/01/Wow-gif.gif",
-          }}
-          style={{ width: 120, height: 160, borderRadius: 10 }}
-        />
-      </View>
 
       <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
         GAMBAR TUGAS 2
