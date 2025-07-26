@@ -59,7 +59,7 @@ export default function Index() {
       </Text>
 
       {/* 10 - Static Font (ulang): "DancingScript" digunakan kembali agar ada variasi dan penguatan visual */}
-      <Text style={{ fontFamily: "DancingScript", fontSize: 24, color: "blue" }}>
+      <Text style={{ fontFamily: "NotoSansSinhala ", fontSize: 24, color: "blue" }}>
         {"\n"}===m. agil gimnas== (105841106622)
       </Text>
 
