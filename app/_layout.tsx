@@ -26,6 +26,8 @@ export default function RootLayout() {
     require("../assets/fonts/IntelOneMono-VariableFont_wght.ttf"),
     PlaywritePL: 
     require("../assets/fonts/PlaywritePL-VariableFont_wght.ttf"),
+    NotoSansSinhala: 
+    require("../assets/fonts/NotoSansSinhala-VariableFont_wdth,wght.ttf"),
   });
 
   useEffect(() => {
