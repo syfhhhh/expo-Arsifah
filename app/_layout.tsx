@@ -8,15 +8,24 @@ splashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    CabinSketch: require("../assets/fonts/CabinSketch-Regular.ttf"),
-    CormorantUnicase: require("../assets/fonts/CormorantUnicase-Regular.ttf"),
-    CroissantOne: require("../assets/fonts/CroissantOne-Regular.ttf"),
-    DancingScript: require("../assets/fonts/DancingScript-VariableFont_wght.ttf"),
-    Gabriela: require("../assets/fonts/Gabriela-Regular.ttf"),
-    Niconne: require("../assets/fonts/Niconne-Regular.ttf"),
-    Caveat: require("../assets/fonts/Caveat-VariableFont_wght.ttf"),
-    IntelOneMono: require("../assets/fonts/IntelOneMono-VariableFont_wght.ttf"),
-    PlaywritePL: require("../assets/fonts/PlaywritePL-VariableFont_wght.ttf"),
+    CabinSketch:
+    require("../assets/fonts/CabinSketch-Regular.ttf"),
+    CormorantUnicase:
+    require("../assets/fonts/CormorantUnicase-Regular.ttf"),
+    CroissantOne: 
+    require("../assets/fonts/CroissantOne-Regular.ttf"),
+    DancingScript: 
+    require("../assets/fonts/DancingScript-VariableFont_wght.ttf"),
+    Gabriela:
+    require("../assets/fonts/Gabriela-Regular.ttf"),
+    Niconne: 
+    require("../assets/fonts/Niconne-Regular.ttf"),
+    Caveat: 
+    require("../assets/fonts/Caveat-VariableFont_wght.ttf"),
+    IntelOneMono: 
+    require("../assets/fonts/IntelOneMono-VariableFont_wght.ttf"),
+    PlaywritePL: 
+    require("../assets/fonts/PlaywritePL-VariableFont_wght.ttf"),
   });
 
   useEffect(() => {
