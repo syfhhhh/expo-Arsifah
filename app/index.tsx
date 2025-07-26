@@ -1,119 +1,70 @@
-import React, { useState } from 'react';
-import {
-  ScrollView,
-  Pressable,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+// Import komponen yang dibutuhkan dari React Native
+import { ScrollView, Text, View } from "react-native";
 
-// ===============================
-// KONFIGURASI UMUM (MUDAH DIUBAH)
-// ===============================
-const JUMLAH_BARIS = 3; // untuk menentukan jumlah gambar 3x3
-const GAMBARS_PER_BARIS = 3;
-const RADIUS_GAMBAR = 14;
-const WARNA_LATAR = '#f0f4f8';
-const WARNA_BORDER_DEFAULT = '#aaa';
-const WARNA_BORDER_ALTERNATIF = '#4FC3F7';
-const WARNA_BAYANGAN = '#000';
-const MAKS_SKALA = 2;
-const KALI_SKALA = 1.2;
-const MARGIN_GAMBAR = 6;
-
-const nimAwal = '10584110';
-const nimAkhir = '22';
-const urlUtama = 'https://simak.unismuh.ac.id/upload/mahasiswa/';
-const parameterGambar = '_.jpg?1751871539';
-const gambarAlternatif =
-  'https://uploads-us-west-2.insided.com/figma-en/attachment/7105e9c010b3d1f0ea893ed5ca3bd58e6cec090e.gif';
-
-// ===============================
-// HITUNG UKURAN GAMBAR
-// ===============================
-const ukuran = Dimensions.get('window').width / GAMBARS_PER_BARIS - (MARGIN_GAMBAR * 2);
-
-// ===============================
-// DATA GAMBAR
-// ===============================
-const buatDaftarGambar = () => {
-  const daftar = [];
-  for (let i = 60; i < 60 + JUMLAH_BARIS * GAMBARS_PER_BARIS; i++) {
-    const nim = `${nimAwal}${i}${nimAkhir}`;
-    daftar.push({
-      main: `${urlUtama}${nim}${parameterGambar}`,
-      alt: gambarAlternatif,
-    });
-  }
-  return daftar;
-};
-
-// ===============================
-// KOMPONEN UTAMA
-// ===============================
-export default function GridGambar() {
-  const dataGambar = buatDaftarGambar();
-
-  const [statusGambar, setStatusGambar] = useState(
-    dataGambar.map(() => ({ scale: 1, isAlt: false }))
-  );
-
-  const handleGambarTekan = (index: number) => {
-    setStatusGambar((prev) =>
-      prev.map((item, i) => {
-        if (i !== index) return item;
-        const skalaBaru = item.scale < MAKS_SKALA ? item.scale * KALI_SKALA : MAKS_SKALA;
-        return {
-          scale: skalaBaru,
-          isAlt: !item.isAlt,
-        };
-      })
-    );
-  };
-
+// Fungsi utama komponen Index
+export default function Index() {
   return (
-    <ScrollView contentContainerStyle={gaya.grid}>
-      {dataGambar.map((gambar, index) => (
-        <Pressable key={index} onPress={() => handleGambarTekan(index)}>
-          <Image
-            source={{ uri: statusGambar[index].isAlt ? gambar.alt : gambar.main }}
-            style={[
-              gaya.image,
-              {
-                transform: [{ scale: statusGambar[index].scale }],
-                borderColor: statusGambar[index].isAlt ? WARNA_BORDER_ALTERNATIF : WARNA_BORDER_DEFAULT,
-                shadowColor: WARNA_BAYANGAN,
-              },
-            ]}
-          />
-        </Pressable>
-      ))}
+    <ScrollView contentContainerStyle={{ padding: 20 }}>
+      
+      {/* Font: CabinSketch */}
+      <Text style={{ fontFamily: "CabinSketch", fontSize: 26, color: "blue",}}>
+        Zaskia aulia ashar
+        {"\n"}105841105722
+      </Text>
+
+      {/* Font: CormorantUnicase */}
+      <Text style={{ fontFamily: "CormorantUnicase", fontSize: 24, color: "blue"}}>
+        MUH. ILHAM AKBAR
+        {"\n"}105841105822
+      </Text>
+
+      {/* Font: CroissantOne */}
+      <Text style={{ fontFamily: "CroissantOne", fontSize: 24, color: "blue" }}>
+        ZELVIA
+        {"\n"}105841105922
+      </Text>
+
+      {/* Font: DancingScript */}
+      <Text style={{ fontFamily: "DancingScript", fontSize: 24,color: "blue" }}>
+        andi difta rameyza
+        {"\n"}105841106022
+      </Text>
+
+      {/* Font: Gabriela */}
+      <Text style={{ fontFamily: "Gabriela", fontSize: 24,color: "red", fontWeight: "bold" }}>
+        Arsifah ainun aulia
+        {"\n"}105841106122
+      </Text>
+
+      {/* Font alternatif karena ManufacturingConsent tidak tersedia */}
+      <Text style={{ fontFamily: "IntelOneMono", fontSize: 24, color: "blue" }}>
+        105841106222
+        {"\n"}tegar surya prayoga
+      </Text>
+
+      {/* Font: Niconne */}
+      <Text style={{ fontFamily: "Niconne", fontSize: 24, color: "blue" }}>
+        105841106322
+        {"\n"}andi angke riona megawan
+      </Text>
+
+      {/* Font: DancingScript lagi, sesuai kesan feminim */}
+      <Text style={{ fontFamily: "DancingScript", fontSize: 24, color: "blue" }}>
+        105841106422
+        {"\n"}muh. fadli
+      </Text>
+
+      {/* Font: Caveat (mirip dengan gaya ringan dan sedikit miring) */}
+      <Text style={{ fontFamily: "Caveat", fontSize: 24, color: "blue" }}>
+        105841106522
+        {"\n"} a.fahcri
+      </Text>
+
+      {/* Font: PlaywritePL (cocok untuk kesan formal dan bold) */}
+      <Text style={{ fontFamily: "PlaywritePL", fontSize: 24, color: "blue" }}>
+        105841106622
+        {"\n"}m. agil gimnas
+      </Text>
     </ScrollView>
   );
 }
-
-// ===============================
-// GAYA
-// ===============================
-const gaya = StyleSheet.create({
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: WARNA_LATAR,
-  },
-  image: {
-    width: ukuran,
-    height: ukuran,
-    margin: MARGIN_GAMBAR,
-    borderRadius: RADIUS_GAMBAR,
-    resizeMode: 'cover',
-    backgroundColor: '#eee',
-    borderWidth: 2,
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-    elevation: 5,
-  },
-});
